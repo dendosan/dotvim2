@@ -46,7 +46,7 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
+
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -85,6 +85,8 @@ Plug 'tomasr/molokai'
 "" Go Lang Bundle
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
+Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['go']
 
 " ruby
 Plug 'tpope/vim-rails'
@@ -189,7 +191,7 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
+
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
   else
@@ -197,7 +199,7 @@ else
       set term=xterm-256color
     endif
   endif
-  
+
 endif
 
 
@@ -243,7 +245,7 @@ let g:airline_skip_empty_sections = 1
 "*****************************************************************************
 "" Abbreviations
 "*****************************************************************************
-"" no one is really happy until you have this shortcuts
+"" no one is really happy until you have these shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!

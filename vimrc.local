@@ -15,7 +15,7 @@ imap <C-c> <Esc>
 
 " my custom vim-go mappings
 " https://github.com/fatih/vim-go-tutorial
-au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <leader>c <Plug>(go-coverage-toggle)
 
 "" vim-go settings
 let g:go_snippet_case_type = "camelcase"
