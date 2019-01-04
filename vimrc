@@ -521,6 +521,7 @@ augroup go
   au FileType go imap <leader>dr <esc>:<C-u>GoDeclsDir<cr>
   au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
 
+  autocmd BufNewFile,BufRead *.gohtml   set syntax=html
 augroup END
 
 
