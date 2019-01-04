@@ -2,6 +2,9 @@
 " it to when doing go-build, go-test, ...
 set autowrite
 
+set virtualedit=all     " cursor can travel to any space in buffer
+set cpoptions+=$        " places $ at change position
+
 " Mappings for navigating the quickfix list
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
