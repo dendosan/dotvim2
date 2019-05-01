@@ -1,4 +1,24 @@
 Plug 'Shougo/neocomplete'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
-Plug 'mattn/emmet-vim'
+Plug 'burnettk/vim-angular'
+" TypeScript
+" enable for tslint checking
+"Plug 'scrooloose/syntastic', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mxw/vim-jsx'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'Valloric/MatchTagAlways'
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+
+" post install (yarn install | npm install)
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+Plug 'sbdchd/neoformat'
+Plug 'neomake/neomake'
+
+Plug 'tpope/vim-unimpaired'

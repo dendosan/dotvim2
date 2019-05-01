@@ -68,7 +68,116 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 "HTML Tidy for Syntastic
-let g:syntastic_html_tidy_ignore_errors = [ '<link> proprietary attribute "integrity"', '<link> proprietary attribute "crossorigin"' ]
+let g:syntastic_mode_map = {
+            \'mode': 'passive',
+            \'active_filetypes': [],
+            \'passive_filetypes': []
+            \}
+nnoremap <C-w>E :SyntasticCheck<CR>
+
+let g:syntastic_html_tidy_ignore_errors=[
+            \" proprietary attribute ",
+            \"trimming empty \<",
+            \"inserting implicit ",
+            \"unescaped \&" ,
+            \"lacks \"action",
+            \"lacks value",
+            \"lacks \"src",
+            \"is not recognized!",
+            \"discarding unexpected",
+            \"replacing obsolete "
+            \]
+
+"Typescript settings for Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tslint', 'tsuquyomi']
+
+" Typescript settings
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+" js-pretty-template settings
+"autocmd FileType typescript JsPreTmpl html
+autocmd FileType typescript syn clear foldBraces
+
+" Allow Vim-JSX to highlight *.js files
+let g:jsx_ext_required = 0
+" Allow MatchTagAlways to highlight JSX
+let g:mta_filetypes = {
+  \ 'javascript.jsx' : 1,
+  \}
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+
+" Emmet Settings {{{
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+" }}}
+
+
+" Line Numbering {{{
+"Toggle relative numbering, and set to absolute on loss of focus or insert mode
+set rnu
+function! ToggleNumbersOn()
+    set nu!
+    set rnu
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
+" }}}
+
+" Tags {{{
+command! MakeTags !ctags -R .
+
+" NOW CAN:
+" - Use ^] to jump to tag under cursor
+" - Use g^] for ambiguous tags
+" - Use ^t to jump back up the tag stack
+" }}}
+
+" insert newline without entering insert mode
+map <CR> o<Esc>k
+
+" reloads .vimrc -- making all changes active
+map <silent> <Leader>v :source ~/.vimrc<CR>:PlugInstall<CR>:bdelete<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" the write sudo trick made easy
+cmap w!! %!sudo tee > /dev/null %
+
+" Custom Mappings {{{
+nnoremap Q !!$SHELL<CR>                  " Q runs current line as a shell program
+nnoremap <leader>- ddp                   " move line down
+nnoremap <leader>_ ddkP                  " move line up
+inoremap <c-u> <esc>viwU<esc>eli         " UP current word and stay in insert mode
+nnoremap <c-u> viwUel                    " UP current word and stay in norm mode
+
+" prettier config {{{
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+"  }}}
+
+" Folding {{{
+set foldmethod=indent   " fold based on indent level
+set foldnestmax=10      " max 10 depth
+set foldenable          " don't fold files by default on open
+set foldlevelstart=10   " start with fold level of 1
+" }}}
+" vim:foldmethod=marker:foldlevel=0
+
